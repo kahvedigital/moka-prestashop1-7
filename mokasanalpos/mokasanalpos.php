@@ -107,11 +107,12 @@ class Mokasanalpos extends PaymentModule {
 
         $version = $this->_ModuleVersion;
         $psver = _PS_VERSION_;
+	$serverdomain=$_SERVER['HTTP_HOST'];    
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'http://api.kahvedigital.com/version');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "psversion=$psver&moka=$version&type=prestashop");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "psversion=$psver&moka=$version&type=prestashop&domain=$serverdomain");
         $response = curl_exec($ch);
         $response = json_decode($response, true);
         $this->context->smarty->assign('version', $response);
