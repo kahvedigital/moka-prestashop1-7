@@ -371,7 +371,7 @@ class Mokasanalpos extends PaymentModule {
 
         $moka_order_id = 'prestashop-1-6-' . $order->id_cart;
 
-        $url = 'https://service.testmoka.com/PaymentDealer/GetDealerPaymentTrxDetailList';
+        $url = 'https://service.moka.com/PaymentDealer/GetDealerPaymentTrxDetailList';
         $dealercode = Configuration::get('MOKA_BAYI_KODU');
         $username = Configuration::get('MOKA_KULLANICI_ADI');
         $password = Configuration::get('MOKA_SYSTEM_PASS');
