@@ -90,10 +90,10 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
                 $ucdaktif = Configuration::get('MOKA_THREED_AKTIF');
                 if ($ucdaktif == 'close') {
 
-                    $moka_url = "https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD";
+                    $moka_url = "https://service.moka.com/PaymentDealer/DoDirectPaymentThreeD";
                 } else {
 
-                    $moka_url = "https://service.testmoka.com/PaymentDealer/DoDirectPaymentThreeD";
+                    $moka_url = "https://service.moka.com/PaymentDealer/DoDirectPaymentThreeD";
                 }
 
                 $dealer_code = Configuration::get('MOKA_BAYI_KODU');
