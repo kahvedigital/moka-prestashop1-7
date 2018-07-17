@@ -109,7 +109,7 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
                 $checkkey = hash("sha256", $dealer_code . "MK" . $username . "PD" . $password);
                 $veri = array('PaymentDealerAuthentication' => array('DealerCode' => $dealer_code, 'Username' => $username, 'Password' => $password,
                         'CheckKey' => $checkkey),
-                    'PaymentDealerRequest' => array('CardHolderFullName' => $_POST['kart_isim'],
+                    'PaymentDealerRequest' => array('CardHolderFullName' => $name,
                         'CardNumber' => $number,
                         'ExpMonth' => $expiryMM,
                         'ExpYear' => '20' . $expiryYY,
