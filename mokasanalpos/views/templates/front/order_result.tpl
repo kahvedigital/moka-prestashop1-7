@@ -1,3 +1,5 @@
+{extends file='page.tpl'}
+{block name='page_content'}
 <p>
    {if !empty({$error})}
 <div class="alert alert-danger">
@@ -28,3 +30,4 @@
         {/if}
     {/if}
 </p>
+{/block}
