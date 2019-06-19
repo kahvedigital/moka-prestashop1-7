@@ -13,7 +13,7 @@ Class KahveDigital
 			'bonus' => array('name' => 'BonusCard', 'bank' => 'Garanti Bankası A.Ş.'),
 			'cardfinans' => array('name' => 'CardFinans', 'bank' => 'FinansBank A.Ş.'),
 			'maximum' => array('name' => 'Maximum', 'bank' => 'T.C. İş Bankası'),
-		        'paraf' => array('name' => 'Paraf', 'bank' => 'Halk Bankası', 'installments' => true),
+		        'paraf' => array('name' => 'Paraf', 'bank' => 'Halk Bankası'),
 		
 		);
 	}
