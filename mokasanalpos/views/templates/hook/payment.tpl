@@ -1,4 +1,4 @@
-﻿<link rel="stylesheet" type="text/css" href="{$module_dir|escape:'htmlall':'UTF-8'}views/css/moka.css">
+<link rel="stylesheet" type="text/css" href="{$module_dir|escape:'htmlall':'UTF-8'}views/css/moka.css">
     <div class= "row"> 
         <div class="col-xs-12">
 
@@ -50,9 +50,9 @@
                                 <div class="tekcekim">
 
                                     <li class="taksit-li " for="s-option" >
-                                        <input type="radio" id="s-option"  name="mokatotal"  value="{Tools::displayPrice($total)}" checked class="option-input taksitradio radio " >
+                                        <input type="radio" id="s-option"  name="mokatotal"  value="{$total}" checked class="option-input taksitradio radio " >
                                             <label for="s-option">Tek Çekim</label>
-                                            <div class="taksit-fiyat"> {Tools::displayPrice($total)} </div>
+                                            <div class="taksit-fiyat"> {$total} {$currency_iso} </div>
                                             <div class="check"><div class="inside"></div></div>
                                     </li>
 					
@@ -95,9 +95,9 @@
                                     {if $rates.$bank.active == 1 }
 
                                     <li class="taksit-li mokaorta">
-                                        <input type="radio" id="s-option_{$bank}_{$ins}" name="mokatotal[{$bank}][{$ins}]" value="{Tools::displayPrice($rates.$bank.installments.$ins.total)}" class="option-input  taksitradio radio">
+                                        <input type="radio" id="s-option_{$bank}_{$ins}" name="mokatotal[{$bank}][{$ins}]" value="{$rates.$bank.installments.$ins.total}" class="option-input  taksitradio radio">
                                             <label for="s-option2">{$ins} Taksit</label>
-                                            <div class="taksit-fiyat"> {Tools::displayPrice($rates.$bank.installments.$ins.total)} / {Tools::displayPrice($rates.$bank.installments.$ins.monthly)} </div>
+                                            <div class="taksit-fiyat"> {$rates.$bank.installments.$ins.total} / {$rates.$bank.installments.$ins.monthly} {$currency_iso} </div>
                                             <div class="check"><div class="inside"></div></div>
                                     </li>
 
@@ -122,7 +122,7 @@
 
                             </div>
     {/if}	
-                            <button type="submit" class="mokaode" href="javascript:;" style=""><span class="mokaOdemeTutar">{Tools::displayPrice($total)}</span><span class="mokaOdemeText"> ÖDE</span></button>
+                            <button type="submit" class="mokaode" href="javascript:;" style=""><span class="mokaOdemeTutar">{$total}</span><span class="mokaOdemeText"> {$currency_iso} ÖDE</span></button>
                             </form>
 
                         </div>
