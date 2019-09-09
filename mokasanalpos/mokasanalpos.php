@@ -206,7 +206,8 @@ class Mokasanalpos extends PaymentModule {
 
     public function hookPaymentOptions($params) {
        try {
-
+        $currency_query = 'SELECT * FROM `' . _DB_PREFIX_ . 'currency` WHERE `id_currency`= "' . $params['cookie']->id_currency . '"';
+        $currency = Db::getInstance()->ExecuteS($currency_query);
         $currency_iso = $currency[0]['iso_code'];
         $this->smarty->assign('currency_iso', $currency_iso);
         $taksit = unserialize(Configuration::get('MOKA_TAKSIT'));
