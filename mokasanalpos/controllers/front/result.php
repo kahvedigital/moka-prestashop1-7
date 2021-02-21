@@ -120,6 +120,7 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
                         'ClientIP' => $_SERVER['REMOTE_ADDR'],
                         'RedirectUrl' => $RedirectUrl,
                         'OtherTrxCode' => $OtherTrxCode,
+			'ReturnHash' => 1,			    
                         'SubMerchantName' => $SubMerchantName));
 
 
@@ -139,8 +140,9 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
                 $ResultMessage = $result->ResultMessage;
 
                 if ($ResultCode == 'Success') {
-
-                    header("Location: " . $Data);
+		session_start();
+                $_SESSION['CodeForHash'] = $result->Data->CodeForHash;
+                header("Location:" . $result->Data->Url);
                 } else {
 
                     switch ($ResultCode) {
@@ -229,9 +231,20 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
         $cart = $context->cart;
         $error_msg = '';
 
-        $success = $_POST['isSuccessful'];
+ 
         $resultMessage = $_POST['resultMessage'];
         $trxCode = $_POST['trxCode'];
+    
+            $hashValue = $_POST['hashValue'];
+	    session_start();	
+            $HashSession = SHA256($_SESSION['CodeForHash']+"T");
+            if ($hashValue == $HashSession) {
+             $success = true;
+            } else {
+             $success =  false;
+            }
+
+  
 
 
         $cart_total = (float) $cart->getOrderTotal(true, Cart::BOTH);
@@ -240,9 +253,9 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
         $currency = new Currency((int) ($cart->id_currency));
         $iso_code = ($currency->iso_code) ? $currency->iso_code : '';
 
-        if ($success == 'False') {
+        if ($success == false) {
             $error_msg = $resultMessage;
-        } else if ($success == 'True') {
+        } else if ($success == true) {
             $mokapos->validateOrder((int) $cart->id, Configuration::get('PS_OS_PAYMENT'), $cart_total, $mokapos->displayName, null, $total, (int) $currency->id, false, $cart->secure_key);
             $success = $trxCode;
         }
