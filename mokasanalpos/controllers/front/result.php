@@ -16,6 +16,34 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
         }
     }
 
+	
+    private function checkAndSetCookieSameSite(){
+
+        $checkCookieNames = array('PHPSESSID','OCSESSID','default','PrestaShop-','wp_woocommerce_session_');
+
+        foreach ($_COOKIE as $cookieName => $value) {
+            foreach ($checkCookieNames as $checkCookieName){
+                if (stripos($cookieName,$checkCookieName) === 0) {
+                    $this->setcookieSameSite($cookieName,$_COOKIE[$cookieName], time() + 86400, "/", $_SERVER['SERVER_NAME'],true, true);
+                }
+            }
+        }
+    }
+	
+	    private function checkAndSetCookieSameSite(){
+
+        $checkCookieNames = array('PHPSESSID','OCSESSID','default','PrestaShop-','wp_woocommerce_session_');
+
+        foreach ($_COOKIE as $cookieName => $value) {
+            foreach ($checkCookieNames as $checkCookieName){
+                if (stripos($cookieName,$checkCookieName) === 0) {
+                    $this->setcookieSameSite($cookieName,$_COOKIE[$cookieName], time() + 86400, "/", $_SERVER['SERVER_NAME'],true, true);
+                }
+            }
+        }
+    }
+
+	
     public function initResult() {
 
         function replaceSpace($veri) {
@@ -36,7 +64,7 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
         $error_msg = '';
 
         try {
-
+      	    $this->checkAndSetCookieSameSite();
             $name = Tools::getValue('name');
             $number = Tools::getValue('number');
             $expiry = Tools::getValue('expiry');
