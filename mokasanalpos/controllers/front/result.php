@@ -15,7 +15,27 @@ class MokasanalposResultModuleFrontController extends ModuleFrontController {
             $this->{$action_list[$module_action]}();
         }
     }
+	
+	
+    private function setcookieSameSite($name, $value, $expire, $path, $domain, $secure, $httponly) {
 
+        if (PHP_VERSION_ID < 70300) {
+
+            setcookie($name, $value, $expire, "$path; samesite=None", $domain, $secure, $httponly);
+        }
+        else {
+            setcookie($name, $value, [
+                'expires' => $expire,
+                'path' => $path,
+                'domain' => $domain,
+                'samesite' => 'None',
+                'secure' => $secure,
+                'httponly' => $httponly
+            ]);
+
+
+        }
+    }
 	
 
    private function checkAndSetCookieSameSite(){
